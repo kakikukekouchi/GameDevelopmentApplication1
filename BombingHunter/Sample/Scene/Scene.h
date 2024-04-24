@@ -14,13 +14,13 @@ public:
 
 	void Initialize();
 	void Update();
-	void Draw()const;
+	void Draw() const;
 	void Finalize();
 
 private:
 	//オブジェクト生成処理
 	template<class T>
-	T* CreatObject(const Vector2D& location)
+	T* CreateObject(const Vector2D& location)
 	{
 		//指定したクラスを生成する
 		T* new_instance = new T();

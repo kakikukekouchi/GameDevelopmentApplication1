@@ -53,7 +53,7 @@ void Player::Draw() const
 	DrawRotaGraphF(location.x, location.y, 1.0, radian, image, TRUE, filp_flag);
 
 //デバッグ用
-	#if_DEBUG
+	#if _DEBUG
 		//当たり判定の可視化
 		Vector2D box_collision_upper_left = location - (Vector2D(1.0f) * (float)scale / 2.0f);
 	    Vector2D box_collision_lower_right = location + (Vector2D(1.0f) * (float)scale / 2.0f);

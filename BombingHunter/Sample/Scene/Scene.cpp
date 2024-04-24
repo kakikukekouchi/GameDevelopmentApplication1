@@ -32,7 +32,7 @@ void Scene::Update()
 }
 
 //描画処理
-void Sene::Draw()const
+void Scene::Draw()const
 {
 	//シーンに存在するオブジェクトの描画処理
 	for (GameObject* obj : objects)
