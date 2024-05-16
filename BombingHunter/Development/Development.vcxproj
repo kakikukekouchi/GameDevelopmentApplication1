@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -132,6 +132,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AppMain.cpp" />
+    <ClCompile Include="Objects\Enemy\Enemy.cpp" />
+    <ClCompile Include="Utility\InputControl.cpp" />
+    <ClCompile Include="Objects\GameObject.cpp" />
+    <ClCompile Include="Objects\Player\Player.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Utility\Vector2D.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Objects\Enemy\Enemy.h" />
+    <ClInclude Include="Utility\InputControl.h" />
+    <ClInclude Include="Objects\GameObject.h" />
+    <ClInclude Include="Objects\Player\Player.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Utility\Vector2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\Images\BoxEnemy\1.png" />
+    <Image Include="Resource\Images\BoxEnemy\2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

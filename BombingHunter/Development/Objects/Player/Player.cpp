@@ -30,9 +30,9 @@ void Player::Initialize()
 
 	//向きの設定
 	radian = 0.0;
-	
-	//当たり判定の大きさの設定
-	box_size = 64.0;
+
+	//大きさの設定
+	scale = 64.0;
 
 	//初期画像の設定
 	image = animation[0];
@@ -52,13 +52,13 @@ void Player::Draw() const
 	//プレイヤー画像の描画
 	DrawRotaGraphF(location.x, location.y, 1.0, radian, image, TRUE, filp_flag);
 
-//デバッグ用
-	#if _DEBUG
-		//当たり判定の可視化
-		Vector2D box_collision_upper_left = location - (Vector2D(1.0f) * (float)scale / 2.0f);
-	    Vector2D box_collision_lower_right = location + (Vector2D(1.0f) * (float)scale / 2.0f);
+	//デバッグ用
+#if _DEBUG
+	//当たり判定の可視化
+	Vector2D box_collision_upper_left = location - (Vector2D(1.0f) * (float)scale / 2.0f);
+	Vector2D box_collision_lower_right = location + (Vector2D(1.0f) * (float)scale / 2.0f);
 
-		DrawBoxAA(box_collision_upper_left.x, box_collision_upper_left.y, box_collision_lower_right.x, box_collision_lower_right.y, GetColor(255, 0, 0), FALSE);
+	DrawBoxAA(box_collision_upper_left.x, box_collision_upper_left.y, box_collision_lower_right.x, box_collision_lower_right.y, GetColor(255, 0, 0), FALSE);
 #endif
 }
 
@@ -71,7 +71,7 @@ void Player::Finalize()
 }
 
 //当たり判定通知処理
-void Player::OnHitCollision(GameObject*hit_Object)
+void Player::OnHitCollision(GameObject* hit_Object)
 {
 	//当たった時の処理
 }
