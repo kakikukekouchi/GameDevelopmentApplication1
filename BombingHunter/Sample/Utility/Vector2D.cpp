@@ -48,7 +48,7 @@ const Vector2D Vector2D::operator-(const Vector2D& location)const
 	Vector2D result = Vector2D(0.0f);
 
 	result.x = this->x - location.x;
-	result.y = this->y - location.x;
+	result.y = this->y - location.y;
 
 	return result;
 }

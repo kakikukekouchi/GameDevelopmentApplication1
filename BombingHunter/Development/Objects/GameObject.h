@@ -1,13 +1,13 @@
 #pragma once
 
-#include "../Utility/Vector2D.h"
+#include"../Utility/Vector2D.h"
 
 //ゲームオブジェクト基底クラス
 class GameObject
 {
 protected:
+	Vector2D box_size;    //矩形の大きさ
 	Vector2D location;    //位置情報
-	double scale;         //大きさ
 	double radian;        //向き
 	int image;            //描画する画像
 	int sound;            //再生する音源
@@ -28,5 +28,8 @@ public:
 	Vector2D GetLocation()const;
 	//位置情報変更処理
 	void SetLocation(const Vector2D& location);
+
+	//当たり判定の大きさを所得する
+	Vector2D GetBoxSize() const;
 };
 

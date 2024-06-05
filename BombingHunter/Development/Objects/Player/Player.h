@@ -6,6 +6,7 @@ private:
 	int animation[2];   //アニメーション画像
 	int animation_count; //アニメーション時間
 	int filp_flag;      //反転フラグ
+	int image;					//画像データ
 
 public:
 	Player();

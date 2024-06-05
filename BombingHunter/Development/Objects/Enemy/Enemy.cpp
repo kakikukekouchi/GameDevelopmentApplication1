@@ -32,7 +32,7 @@ void Enemy::Initialize()
 	radian = 0.0;
 
 	//大きさの設定
-	scale = 64.0;
+	box_size = 64.0;
 
 	//初期画像の設定
 	image = animation[0];
@@ -50,13 +50,13 @@ void Enemy::Update()
 void Enemy::Draw() const
 {
 	//プレイヤー画像の描画
-	DrawRotaGraphF(location.x, location.y, 1.0, radian, image, TRUE, filp_flag);
+	DrawRotaGraphF(location.x, location.y, 0.5, radian, image, TRUE, filp_flag);
 
 	//デバッグ用
 #if _DEBUG
 	//当たり判定の可視化
-	Vector2D box_collision_upper_left = location - (Vector2D(1.0f) * (float)scale / 2.0f);
-	Vector2D box_collision_lower_right = location + (Vector2D(1.0f) * (float)scale / 2.0f);
+	Vector2D box_collision_upper_left = location - (box_size / 2.0f);
+	Vector2D box_collision_lower_right = location + ( box_size / 2.0f);
 
 	DrawBoxAA(box_collision_upper_left.x, box_collision_upper_left.y, box_collision_lower_right.x, box_collision_lower_right.y, GetColor(255, 0, 0), FALSE);
 #endif
@@ -87,13 +87,13 @@ void Enemy::Movement()
 	
 
 	//現在の位置座標に速さを加算する
-	location += velocity;
+ location += velocity;
 }
 
 //アニメーション制御
 void Enemy::AnimeControl()
 {
-	//フレームカウントを加算する
+	//フレームカウントを加算するz
 	animation_count++;
 
 	//６０フレーム目に到達したら

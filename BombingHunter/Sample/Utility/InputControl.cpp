@@ -1,6 +1,7 @@
 #include "InputControl.h"
 #include "DxLib.h"
 
+//静的メンバ
 char InputControl::now_key[D_KEYCODE_MAX] = {};//現在の入力情報
 char InputControl::old_key[D_KEYCODE_MAX] = {};//前フレームの入力情報
 
@@ -15,21 +16,22 @@ void InputControl::Update()
 }
 
 //キーの押下情報取得
+//押し続けているか？
 bool InputControl::GetKey(int key_code)
 {
 	return CheckKeyCodeRange(key_code) && ((now_key[key_code] == TRUE) && (old_key[key_code] == TRUE));
 }
-
+//おしたしゅんかんか？
 bool InputControl::GetKeyDown(int key_code)
 {
 	return CheckKeyCodeRange(key_code) && ((now_key[key_code] == TRUE) && (old_key[key_code] == FALSE));
 }
-
+//はなしたしゅんかんか?  
 bool InputControl::GetKeyUp(int key_code)
 {
 	return CheckKeyCodeRange(key_code) && ((now_key[key_code] == FALSE) && (old_key[key_code] == TRUE));
 }
-
+//キーコードの範囲チェック
 bool InputControl::CheckKeyCodeRange(int key_code)
 {
 	return (0 <= key_code && key_code < D_KEYCODE_MAX);
