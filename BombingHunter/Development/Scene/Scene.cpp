@@ -8,13 +8,19 @@
 #include"../Objects/Enemy/BackGround.h"
 #include"../Objects/Player/Player.h"
 #include"../Objects/Enemy/Bomb.h"
+#include"../Objects/Enemy/tama.h"
+#include"../Objects/GameObject.h"
 #include"DxLib.h"
 
 
-//コンストラクタ
-Scene::Scene() : objects()
-{
+Bomb* b = nullptr;
 
+//コンストラクタ
+Scene::Scene() : objects(),back_image(NULL),tim_image(),tim(),sc(),hi(),oto(NULL),enemy_count(),count()
+{
+	animation_count = 0;
+	enemy_count = NULL;
+	count = NULL;
 }
 
 //デストラクタ
@@ -27,49 +33,119 @@ Scene::~Scene()
 //初期化処理
 void Scene::Initialize()
 {
-	//背景
-	CreateObject<BackGround>(Vector2D(320.0f, 240.0f));
+	
 	//プレイヤーを生成する
-	CreateObject<Player>(Vector2D(60.0f, 60.0f));
+	CreateObject<Player>(Vector2D(300.0f, 60.0f));
 	//エネミィーを生成する
 	CreateObject<Enemy>(Vector2D(350.0f, 350.0f));
+	//エネミィーを生成する
+	CreateObject<Enemy>(Vector2D(240.0f, 350.0f));
+	//エネミィーを生成する
+	CreateObject<Enemy>(Vector2D(150.0f, 350.0f));
 	//エネミィー2を生成する
-	CreateObject<Enemy2>(Vector2D(300.0f, 300.0f));
+	CreateObject<Enemy2>(Vector2D(200.0f, 100.0f));
+	//エネミィー2を生成する
+	CreateObject<Enemy2>(Vector2D(100.0f, 120.0f));
+	//エネミィー2を生成する
+	CreateObject<Enemy2>(Vector2D(300.0f, 120.0f));
 	//エネミィー３を生成する
-	CreateObject<Enemy3>(Vector2D(250.0f, 250.0f));
+	CreateObject<Enemy3>(Vector2D(100.0f, 350.0f));
 	//エネミィー４を生成する
 	CreateObject<Enemy4>(Vector2D(200.0f, 200.0f));
-	
+	//エネミィー４を生成する
+	CreateObject<Enemy4>(Vector2D(100.0f, 200.0f));
+	//エネミィー４を生成する
+	CreateObject<Enemy4>(Vector2D(50.0f, 200.0f));
+
+	oto=LoadSoundMem("Resource/Sounds/Evaluation/BGM_arrows.wav");
+	//背景
+	back_image = LoadGraph("Resource/Images/BackGround.png");
+
+	tim_image = LoadGraph("Resource/Images/TimeLimit/timer-03.png");
 }
+	
 //更新処理
 void Scene::Update()
 {
+	//音
+	PlaySoundMem(oto, DX_PLAYTYPE_LOOP,FALSE);
+	animation_count++;
 	//シーンに存在するオブジェクトの更新処理
 	for (GameObject* obj : objects)
 	{
 		obj->Update();
 	}
+
 	//Zキーを押したら敵を生成する
 	if (InputControl::GetKeyDown(KEY_INPUT_Z))
 	{
-		CreateObject<Bomb>(objects[1]->GetLocation());
+		if (b == nullptr)
+		{
+			b = CreateObject<Bomb>(objects[0]->GetLocation());
+		}
 
 	}
+	//オブジェクト同士の当たり判定チェック
+	for (int i = 1; i < objects.size(); i++)
+	{
+
+		for (int j = i + 1; j < objects.size(); j++)
+		{
+			//当たり判定チェック
+			HitCheckObject(objects[i], objects[j]);
+		}
+	}
+
+	
+	if (InputControl::GetKeyDown(KEY_INPUT_Y))
+	{
+		CreateObject<tama>(objects[2]->GetLocation());
+	}
+
+	//残ってる当たり判定を消す
+	if (b != nullptr)
+	{
+		for (int i = 0; i < objects.size(); i++)
+		{
+			if (objects[i] == b)
+			{
+				if (objects[i]->GetLocation().y > 400.0f && animation_count >= 180)
+				{
+					b->Finalize();
+					delete b;
+					objects.erase(objects.begin() + i);
+					b = nullptr;
+				}
+			}
+		}
+	}	
+
 }
 
 //描画処理
 void Scene::Draw()const
 {
+	DrawRotaGraph(320.0f, 230.0f, 0.7, 0, back_image, TRUE, 0);
+	DrawRotaGraph(30.0f, 460.0, 0.6, 0, tim_image, TRUE, 0);
+	DrawRotaGraph(300.0f, 460.0, 1, 0, hi, TRUE, 0);
+	DrawRotaGraph(320.0f, 460.0, 1, 0, sc, TRUE, 0);
+
 	//シーンに存在するオブジェクトの描画処理
 	for (GameObject* obj : objects)
 	{
 		obj->Draw();
+
 	}
+
+	DrawFormatString(10, 10, GetColor(0, 0, 0), "%d", this->animation_count);
+	
+
 }
 
 //終了時処理
 void Scene::Finalize()
 {
+
 	//動的配列が空なら処理を終了する
 	if (objects.empty())
 	{

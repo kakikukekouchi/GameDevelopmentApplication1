@@ -42,6 +42,7 @@ void BackGround::Draw() const
 {
 	//ƒvƒŒƒCƒ„[‰æ‘œ‚Ì•`‰æ
 	DrawRotaGraphF(location.x, location.y, 0.67, radian, animation, TRUE);
+	/*DrawRotaGraph(320.0f, 195.0, 0.8, 0, animation, TRUE, 0);*/
 
 	
 }

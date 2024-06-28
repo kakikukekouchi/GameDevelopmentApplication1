@@ -8,6 +8,7 @@ GameObject::GameObject() :
 	radian(0.0),
 	image(NULL),
 	sound(NULL)
+	
 {
 
 }
@@ -73,6 +74,16 @@ Vector2D GameObject::GetLocation() const
 void GameObject::SetLocation(const Vector2D& location)
 {
 	this->location = location;
+}
+
+void  GameObject::Settyp(int Objecttype)
+{
+	type = Objecttype;
+}
+
+int   GameObject::Gettyp()
+{
+	return type;
 }
 
 Vector2D GameObject::GetBoxSize() const

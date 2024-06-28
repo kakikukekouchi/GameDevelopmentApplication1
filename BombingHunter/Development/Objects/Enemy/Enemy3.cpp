@@ -51,7 +51,22 @@ void Enemy3::Draw() const
 {
 	//プレイヤー画像の描画
 	DrawRotaGraphF(location.x, location.y, 0.5, radian, image, TRUE, filp_flag);
+	//画像反転フラグ
+	int flip_flag = FALSE;
 
+	if (direction.x < 1.0f)
+	{
+		flip_flag = FALSE;
+	}
+	else
+	{
+		flip_flag = TRUE;
+	}
+	//情報を基にハコテキ画像を描画する
+	DrawRotaGraphF(location.x, location.y, 0.5, radian, image, TRUE, flip_flag);
+
+	//親クラスの描画処理を呼び出す
+	__super::Draw();
 	//デバッグ用
 #if _DEBUG
 	//当たり判定の可視化
@@ -74,11 +89,21 @@ void Enemy3::Finalize()
 void Enemy3::OnHitCollision(GameObject* hit_Object)
 {
 	//当たった時の処理
+	direction = 0.0f;
 }
 
 //移動処理
 void Enemy3::Movement()
 {
+	//右へ移動し続ける
+	location.x += 0.5f;
+	//右壁から左壁
+	if (location.x >= 640.0f)
+	{
+		location.x = 0.0f;
+	}
+	//信仰情報に向かって、位置情報を変更する
+	location += direction;
 	//移動の速さ
 	Vector2D velocity = 0.0f;
 

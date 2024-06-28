@@ -7,7 +7,15 @@ class Scene
 {
 private:
 	std::vector<GameObject*>objects;
-
+	int animation_count; //アニメーション時間
+	int back_image;
+	int tim;
+	int tim_image;
+	int hi;
+	int sc;
+	int count;
+	int enemy_count;
+	int oto;
 public:
 	Scene();
 	~Scene();

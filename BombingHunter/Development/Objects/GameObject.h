@@ -1,5 +1,5 @@
 #pragma once
-
+#define D_PIVOT_CENTER
 #include"../Utility/Vector2D.h"
 
 //ゲームオブジェクト基底クラス
@@ -11,7 +11,7 @@ protected:
 	double radian;        //向き
 	int image;            //描画する画像
 	int sound;            //再生する音源
-
+	int type;			  //オブジェクトのタイプ
 public:
 	GameObject();
 	virtual ~GameObject();
@@ -28,6 +28,10 @@ public:
 	Vector2D GetLocation()const;
 	//位置情報変更処理
 	void SetLocation(const Vector2D& location);
+	//タイプ情報変更処理
+	void Settyp(int Objecttype);
+	//タイプ情報所得処理
+	int  Gettyp();
 
 	//当たり判定の大きさを所得する
 	Vector2D GetBoxSize() const;

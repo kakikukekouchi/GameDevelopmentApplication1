@@ -138,6 +138,7 @@
     <ClCompile Include="Objects\Enemy\Enemy3.cpp" />
     <ClCompile Include="Objects\Enemy\Enemy2.cpp" />
     <ClCompile Include="Objects\Enemy\Enemy.cpp" />
+    <ClCompile Include="Objects\Enemy\tama.cpp" />
     <ClCompile Include="Utility\InputControl.cpp" />
     <ClCompile Include="Objects\GameObject.cpp" />
     <ClCompile Include="Objects\Player\Player.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Objects\Enemy\Enemy3.h" />
     <ClInclude Include="Objects\Enemy\Enemy2.h" />
     <ClInclude Include="Objects\Enemy\Enemy.h" />
+    <ClInclude Include="Objects\Enemy\tama.h" />
     <ClInclude Include="Utility\InputControl.h" />
     <ClInclude Include="Objects\GameObject.h" />
     <ClInclude Include="Objects\Player\Player.h" />
